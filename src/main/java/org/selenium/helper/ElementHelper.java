@@ -1,10 +1,9 @@
 package org.selenium.helper;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -58,6 +57,20 @@ public class ElementHelper {
                 "arguments[0].scrollIntoView({block: 'center', inline: 'center'});",
                 element
         );
+    }
+
+    public static boolean isAlertPresent(WebDriver driver) {
+        Wait<WebDriver> wait = new FluentWait<>(driver)
+                .withTimeout(Duration.ofSeconds(4))
+                .pollingEvery(Duration.ofMillis(200))
+                .ignoring(NoAlertPresentException.class);
+
+        try {
+            wait.until(ExpectedConditions.alertIsPresent());
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public static boolean isElementVisibleInContainer(WebDriver driver, WebElement container, WebElement element) {

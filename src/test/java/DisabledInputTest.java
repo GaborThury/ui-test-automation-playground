@@ -9,7 +9,6 @@ import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-// todo: refactor as a parameterized test and test it with more inputs
 public class DisabledInputTest extends SubpageBase {
 
     public DisabledInputTest() {

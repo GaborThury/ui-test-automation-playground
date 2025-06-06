@@ -2,15 +2,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Wait;
 
-import java.time.Duration;
 import java.util.stream.Stream;
+
+import static org.selenium.helper.ElementHelper.isAlertPresent;
 
 public class AlertsTest extends SubpageBase {
 
@@ -63,17 +59,5 @@ public class AlertsTest extends SubpageBase {
         }
     }
 
-    private boolean isAlertPresent(WebDriver driver) {
-        Wait<WebDriver> wait = new FluentWait<>(driver)
-                .withTimeout(Duration.ofSeconds(4))
-                .pollingEvery(Duration.ofMillis(200))
-                .ignoring(NoAlertPresentException.class);
 
-        try {
-            wait.until(ExpectedConditions.alertIsPresent());
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
 }
